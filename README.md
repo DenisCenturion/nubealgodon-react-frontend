@@ -1,16 +1,69 @@
-# React + Vite
+# 🌸 NubeAlgodón – Primera Pre-entrega React (Coderhouse)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto forma parte de la **Primera Pre-entrega del curso de React** en Coderhouse.  
+El objetivo fue comenzar a estructurar un e-commerce utilizando componentes reutilizables y la arquitectura base de React.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Funcionalidades incluidas
 
-## React Compiler
+### ✔ NavBar
+- Incluye el nombre de la marca: **Nube Algodón**
+- Muestra las categorías principales del sitio
+- Integra el componente **CartWidget**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ✔ CartWidget
+- Ícono de carrito estilo profesional (SVG)
+- Badge con cantidad de productos (valor estático por ahora)
 
-## Expanding the ESLint configuration
+### ✔ ItemListContainer
+- Recibe una prop **`greeting`**
+- Muestra el mensaje dinámicamente en pantalla
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✔ Estructura del proyecto
+- Componentes organizados dentro de `/src/components/`
+- Proyecto creado con **Vite**
+- Estilizado con **TailwindCSS** (opcional pero implementado)
+
+---
+
+## 🛠️ Tecnologías utilizadas
+- **React + Vite**
+- **JavaScript ES6**
+- **TailwindCSS** para estilos
+- **NPM** para gestión de dependencias
+- **SVG personalizado** para el favicon
+
+---
+
+## 🚀 Cómo ejecutar el proyecto (Modo de uso)
+
+1. **Cloná el repositorio:**
+   ```bash
+   git clone <url-del-repositorio>
+
+2. **Cloná el repositorio:**
+   ```bash
+   cd nubealgodon-react-frontend
+
+3. **Instalá dependencias:**
+   ```bash
+   npm install
+
+4. **Ejecutalo en modo desarrollo:**
+   ```bash
+   npm run dev
+
+5. **Abrí en el navegador::**
+   ```bash
+   http://localhost:5173
+----
+
+
+
+
+
+
+
+
+
