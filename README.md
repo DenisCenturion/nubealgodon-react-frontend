@@ -1,38 +1,78 @@
-# 🌸 NubeAlgodón – Primera Pre-entrega React (Coderhouse)
+# 🌸 NubeAlgodón – React Ecommerce (Coderhouse)
 
-Este proyecto forma parte de la **Primera Pre-entrega del curso de React** en Coderhouse.  
-El objetivo fue comenzar a estructurar un e-commerce utilizando componentes reutilizables y la arquitectura base de React.
+Este proyecto forma parte de la **Segunda Pre-entrega del curso de React** en Coderhouse.  
+El objetivo fue construir las bases de un e-commerce real utilizando **componentes reutilizables**, **React Router**, **TailwindCSS**, y consumo de APIs externas.
 
 ---
 
-## 🧩 Funcionalidades incluidas
+## 🧩 Funcionalidades desarrolladas
 
-### ✔ NavBar
-- Incluye el nombre de la marca: **Nube Algodón**
-- Muestra las categorías principales del sitio
-- Integra el componente **CartWidget**
+### ✔ Navegación con React Router
+- Ruta principal `/`
+- Ruta por categoría: `/category/:categoryId`
+- Ruta por producto: `/product/:productId`
+- **Ruta 404 personalizable:** `path="*"`
+
+### ✔ Barra de navegación (NavBar)
+- Marca **Nube Algodón**
+- Menú de categorías dinámico
+- Menú hamburguesa para mobile
+- Navegación con `<Link>`
+- Integración con **CartWidget**
 
 ### ✔ CartWidget
-- Ícono de carrito estilo profesional (SVG)
-- Badge con cantidad de productos (valor estático por ahora)
+- Ícono SVG profesional
+- Badge de cantidad (estático por ahora)
 
-### ✔ ItemListContainer
-- Recibe una prop **`greeting`**
-- Muestra el mensaje dinámicamente en pantalla
+### ✔ Cards de Productos (ProductCardPastel)
+- Diseño personalizado con **TailwindCSS**
+- Badge “OFERTA” automático según descuento
+- Imágenes responsivas
+- Botón “Ver más” que navega a la vista del producto
+- Estilo pastel inspirado en la estética de la marca
 
-### ✔ Estructura del proyecto
-- Componentes organizados dentro de `/src/components/`
-- Proyecto creado con **Vite**
-- Estilizado con **TailwindCSS** (opcional pero implementado)
+### ✔ Consumo de API externa (DummyJSON)
+Se consumieron productos reales desde:  
+➡️ https://dummyjson.com/products
+
+Se utilizan datos como:
+- título  
+- precio  
+- descripción  
+- imágenes  
+- stock  
+- rating  
+- descuento  
+
+### ✔ ItemListContainer + ItemList + Item
+- Render dinámico de productos
+- Mapeo de las cards personalizadas
+- Navegación a detalle al hacer clic
+
+### ✔ Vista de producto (ItemDetail)
+- Imagen principal + miniaturas clickeables
+- Información completa (precio, marca, rating, stock)
+- Sección de reviews
+- Integración con ItemCount
+- Totalmente responsive
+
+### ✔ Contador de unidades (ItemCount)
+- Botones + y -
+- Previene superar stock
+- Envía la cantidad seleccionada a ItemDetail
+- Botón “Agregar al Carrito” centrado y estilizado
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
+
 - **React + Vite**
+- **React Router DOM**
 - **JavaScript ES6**
-- **TailwindCSS** para estilos
-- **NPM** para gestión de dependencias
-- **SVG personalizado** para el favicon
+- **TailwindCSS**
+- **NPM**
+- **Fetch API / Promesas**
+- **Diseño responsive**
 
 ---
 
