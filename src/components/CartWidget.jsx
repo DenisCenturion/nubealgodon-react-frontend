@@ -1,8 +1,11 @@
+import {useNavigate} from 'react-router';
+
 function CartWidget() {
   const itemsInCart = 0;
+  const navigate = useNavigate();
 
   return (
-    <button className="relative inline-flex items-center justify-center rounded-full bg-white/90 px-3 py-2 shadow-sm hover:shadow-md hover:bg-rose-100 transition">
+    <button onClick={()=> navigate('/cart')} className="relative inline-flex items-center justify-center rounded-full bg-white/90 px-3 py-2 shadow-sm hover:shadow-md hover:bg-rose-100 transition">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

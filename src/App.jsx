@@ -1,16 +1,24 @@
 import './App.css'
 import ItemListContainer from './components/ItemListContainer';
-import NavBar from './components/NavBar'
+import NavBarConteiner from './components/NavBarConteiner';
+import { BrowserRouter, Routes, Route } from 'react-router'
+import CartContainer from './components/CartContainer';
+import ItemDetailContainer from './components/ItemDetailContainer';
+import Page404 from './components/Page404';
 
 function App() {
   return (
-    <>
-      {/*<h1 className="font-mono 
-      text-5xl 
-      text-purple-600">Tailwind funcionando</h1>*/}
-      <NavBar/>
-      <ItemListContainer greeting="Bienvenido a Nube Algodón"/>
-    </>
+    <BrowserRouter>
+      <NavBarConteiner/>
+      <Routes>
+        <Route path="/" element={ <ItemListContainer /> } />
+        <Route path="/cart" element={ <CartContainer /> } />
+        <Route path="/category/:categoryId" element={ <ItemListContainer /> } />
+        <Route path="/product/:productId" element={ <ItemDetailContainer /> } />
+        {/* RUTA 404 */}
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
