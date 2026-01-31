@@ -11,7 +11,6 @@ function Item({ prod }) {
 
   return (
     <ProductCard
-      key={prod.id}
       title={prod.title}
       description={prod.description}
       price={prod.price}

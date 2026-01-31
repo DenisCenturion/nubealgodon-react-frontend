@@ -1,6 +1,6 @@
 import Item from "./Item";
 
-function ItemList({items}){
+function ItemList({items = []}){
     return(<div className="
               grid 
               grid-cols-1 

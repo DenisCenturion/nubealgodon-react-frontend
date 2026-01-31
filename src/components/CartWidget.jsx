@@ -1,8 +1,12 @@
 import {useNavigate} from 'react-router';
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 function CartWidget() {
-  const itemsInCart = 0;
+
   const navigate = useNavigate();
+  const { getTotalQuantity } = useContext(CartContext);
+  const itemsInCart = getTotalQuantity();
 
   return (
     <button onClick={()=> navigate('/cart')} className="relative inline-flex items-center justify-center rounded-full bg-white/90 px-3 py-2 shadow-sm hover:shadow-md hover:bg-rose-100 transition">

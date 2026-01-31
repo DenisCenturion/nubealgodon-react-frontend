@@ -1,0 +1,345 @@
+openapi: 3.0.3
+
+info:
+  title: NubeAlgodón API
+  description: API para el e-commerce NubeAlgodón
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Backend local (Spring Boot)
+
+paths:
+  /api/products/{id}:
+    get:
+      summary: Obtener detalle de un producto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID único del producto
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDetail"
+
+        "400":
+          description: ID de producto inválido
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                invalidId:
+                  summary: ID inválido
+                  value:
+                    status: 400
+                    message: ID de producto inválido
+                    timestamp: "2026-01-06T00:15:00Z"
+
+        "404":
+          description: Producto no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                notFound:
+                  summary: Producto inexistente
+                  value:
+                    status: 404
+                    message: Producto no encontrado
+                    timestamp: "2026-01-06T00:16:00Z"
+
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                serverError:
+                  summary: Error inesperado
+                  value:
+                    status: 500
+                    message: Error interno del servidor
+                    timestamp: "2026-01-06T00:17:00Z"
+  /api/orders:
+    post:
+      summary: Crear una orden de compra
+      description: Registra una orden de compra con los datos del comprador y los productos seleccionados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRequest"
+      responses:
+        "201":
+          description: Orden creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+
+        "400":
+          description: Datos de orden inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+
+components:
+  schemas:
+
+    ProductDetail:
+      type: object
+      required:
+        - id
+        - title
+        - category
+        - description
+        - price
+        - discountPercentage
+        - stock
+        - brand
+        - rating
+        - sizes
+        - colors
+        - variants
+        - thumbnail
+        - images
+        - reviews
+      properties:
+        id:
+          type: integer
+          example: 18
+
+        title:
+          type: string
+          example: Cat Food
+
+        description:
+          type: string
+          example: Nutritious cat food formulated to meet the dietary needs of your feline friend.
+
+        price:
+          type: number
+          format: float
+          example: 8.99
+
+        discountPercentage:
+          type: number
+          format: float
+          example: 9.58
+
+        stock:
+          type: integer
+          description: Stock total del producto (informativo)
+          example: 46
+
+        brand:
+          type: string
+          example: Whiskas
+
+        rating:
+          type: number
+          format: float
+          example: 3.1
+
+        sizes:
+          type: array
+          description: Talles disponibles del producto
+          items:
+            type: string
+          example:
+            - S
+            - M
+            - L
+            - XL
+
+        colors:
+          type: array
+          description: Colores disponibles del producto
+          items:
+            type: string
+          example:
+            - Rosa
+            - Celeste
+            - Blanco
+
+        variants:
+          type: array
+          description: Stock por combinación talle + color
+          items:
+            $ref: "#/components/schemas/ProductVariant"
+          example:
+            - size: S
+              color: Rosa
+              stock: 2
+            - size: S
+              color: Celeste
+              stock: 5
+            - size: S
+              color: Blanco
+              stock: 0
+            - size: M
+              color: Rosa
+              stock: 8
+            - size: M
+              color: Celeste
+              stock: 1
+            - size: M
+              color: Blanco
+              stock: 4
+
+        thumbnail:
+          type: string
+          format: uri
+          example: https://cdn.example.com/products/cat-food/thumbnail.webp
+
+        images:
+          type: array
+          items:
+            type: string
+            format: uri
+          example:
+            - https://cdn.example.com/products/cat-food/1.webp
+            - https://cdn.example.com/products/cat-food/2.webp
+
+        reviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+
+    ProductVariant:
+      type: object
+      required:
+        - size
+        - color
+        - stock
+      properties:
+        size:
+          type: string
+          description: Talle de la variante
+          example: M
+        color:
+          type: string
+          description: Color de la variante
+          example: Celeste
+        stock:
+          type: integer
+          description: Stock disponible para esa combinación talle + color
+          minimum: 0
+          example: 3
+
+    Review:
+      type: object
+      required:
+        - rating
+        - comment
+        - reviewerName
+        - date
+      properties:
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
+          example: 4
+        comment:
+          type: string
+          example: Muy buen producto
+        reviewerName:
+          type: string
+          example: Juan Pérez
+        date:
+          type: string
+          format: date-time
+          example: "2026-01-05T14:32:00Z"
+
+    ErrorResponse:
+      type: object
+      required:
+        - status
+        - message
+        - timestamp
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Producto no encontrado
+        timestamp:
+          type: string
+          format: date-time
+
+    OrderRequest:
+      type: object
+      required:
+        - buyer
+        - items
+        - total
+      properties:
+        buyer:
+          $ref: "#/components/schemas/Buyer"
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        total:
+          type: number
+          example: 64000
+
+    OrderResponse:
+      type: object
+      required:
+        - orderId
+      properties:
+        orderId:
+          type: string
+          example: rMsHuUXoFiDG5vS3WeaL
+
+    Buyer:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: Denis Centurion
+        email:
+          type: string
+          format: email
+          example: deniscenturion@gmail.com
+        phone:
+          type: string
+          example: "01156234567"
+
+    OrderItem:
+      type: object
+      required:
+        - id
+        - title
+        - price
+        - quantity
+      properties:
+        id:
+          type: string
+          example: KQJQevIlc4fghaqHKVYm
+        title:
+          type: string
+          example: Maya enteriza
+        price:
+          type: number
+          example: 16000
+        quantity:
+          type: integer
+          example: 4

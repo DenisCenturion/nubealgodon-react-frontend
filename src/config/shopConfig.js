@@ -1,0 +1,3 @@
+export const SHOP_CONFIG = {
+  FREE_SHIPPING_MIN: 150000
+};
